@@ -1,7 +1,7 @@
 count_vm = 1
 
 vm=[
-      {name = "clickhouse-01"
+      {name = "clickhouse"
       image = "fd82nvvtllmimo92uoul"   # ubuntu 22.04
       cpu = 2
       core_fraction = 100
