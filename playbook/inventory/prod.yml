@@ -1,5 +1,5 @@
 ---
-clickhouse:
-  hosts:
-    clickhouse:
-      ansible_host: docker
+  clickhouse:
+    hosts:
+      clickhouse-srv:
+        ansible_connection: docker
