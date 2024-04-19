@@ -36,7 +36,7 @@ vm=[
         "sudo apt-add-repository -y ppa:ansible/ansible",
         "sudo apt update",
         "sudo apt install -y ansible",
-        "docker run -d --privileged --name clickhouse-01 oowy/centos:stream8",
+        "docker run -d --privileged --name clickhouse oowy/centos:stream8",
         
    
       ]},
