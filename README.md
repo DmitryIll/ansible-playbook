@@ -13,13 +13,43 @@
 
 ```yaml
 ---
-clickhouse:
-  hosts:
-    clickhouse-01:
-      ansible_host: docker
+  clickhouse:
+    hosts:
+      click-srv:
+        ansible_connection: docker
 ```
 
 2. Допишите playbook: нужно сделать ещё один play, который устанавливает и настраивает [vector](https://vector.dev). Конфигурация vector должна деплоиться через template файл jinja2. От вас не требуется использовать все возможности шаблонизатора, просто вставьте стандартный конфиг в template файл. Информация по шаблонам по [ссылке](https://www.dmosk.ru/instruktions.php?object=ansible-nginx-install). не забудьте сделать handler на перезапуск vector в случае изменения конфигурации!
+
+Пока для отладки создал свой плейбук в отдельном файле vector.yml.
+Но, не удается запустить службу. 
+Я использовал докер контейнер с systemd и centos.
+
+Код см в гите в файле vector.yml
+
+результаты плея:
+
+![alt text](image.png)
+
+Захожу в контейнер и смотрю логи:
+
+логи внутри контейнера:
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
+
+При этом сам векто запускается:
+
+![alt text](image-3.png)
+
+и так запускается:
+
+![alt text](image-4.png)
+
+
+
+
 3. При создании tasks рекомендую использовать модули: `get_url`, `template`, `unarchive`, `file`.
 4. Tasks должны: скачать дистрибутив нужной версии, выполнить распаковку в выбранную директорию, установить vector.
 5. Запустите `ansible-lint site.yml` и исправьте ошибки, если они есть.
