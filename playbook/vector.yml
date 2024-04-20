@@ -43,7 +43,7 @@
     copy:
       src: "/vector/vector-x86_64-unknown-linux-musl/etc/systemd/vector.service"
       dest: "/etc/systemd/system/vector.service"
-      mode: 0755
+      mode: 0644
       remote_src: yes
 
   # handlers:
