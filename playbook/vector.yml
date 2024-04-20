@@ -1,12 +1,12 @@
 ---
 - name: Install Vector
   hosts: clickhouse
-  handlers:
-    - name: Start vector service
-      become: true
-      ansible.builtin.service:
-        name: vector-server
-        state: restarted
+  # handlers:
+  #   - name: Start vector service
+  #     become: true
+  #     ansible.builtin.service:
+  #       name: vector
+  #       state: restarted
   tasks:
   - name: Create Directories
     file:
