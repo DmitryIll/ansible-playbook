@@ -17,6 +17,7 @@
       mode: 0755
     loop:
       - '/vector/'
+      - '/var/lib/vector'
 
     # - block:
   - name: Get vector distrib
@@ -30,6 +31,28 @@
       src: "/vector/vector-{{ clickhouse_version }}.tar.gz"
       dest: "/vector/"
       remote_src: yes
+
+  - name: Копирование файла запускного вектора
+    copy:
+      src: "/vector/vector-x86_64-unknown-linux-musl/bin/vector"
+      dest: "/usr/bin/vector"
+      remote_src: yes
+
+  - name: Копирование файла сервиса вектора
+    copy:
+      src: "/vector/vector-x86_64-unknown-linux-musl/etc/systemd/vector.service"
+      dest: "/etc/systemd/system/vector.service"
+      remote_src: yes
+
+  # handlers:
+  - name: Start vector service
+    become: true
+    ansible.builtin.service:
+      name: vector-server
+      state: restarted
+      enabled: yes
+
+# /vector/vector-x86_64-unknown-linux-musl/etc/systemd/vector.service
 
 
     # - name: Install clickhouse packages
