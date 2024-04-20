@@ -49,8 +49,8 @@
   # handlers:
   - name: Start vector service
     become: true
-    become_method: su
-    become_user: root
+    # become_method: su
+    # become_user: root
     ansible.builtin.service:
       name: vector
       state: restarted
