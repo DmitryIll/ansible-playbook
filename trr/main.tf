@@ -2,7 +2,8 @@
 
 resource "yandex_compute_instance" "vm" {
 
-  count = "${var.count_vm}"
+  #  count = "${var.count_vm}"
+  count = length(var.vm)
 
   name = "${var.vm[count.index].name}" 
   hostname = "${var.vm[count.index].name}" 
