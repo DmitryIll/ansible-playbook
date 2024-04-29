@@ -1,3 +1,33 @@
+# Заметки по старту сервиса:
+
+- создать пользователя vector
+- создать папки
+ 
+mkdir -p vector &&   curl -sSfL --proto '=https' --tlsv1.2 https://packages.timber.io/vector/0.37.1/vector-0.37.1-x86_64-unknown-linux-musl.tar.gz  |   tar xzf - -C vector --strip-components=2
+
+echo "export PATH=\"$(pwd)/vector/bin:\$PATH\"" >> $HOME/.profile
+
+source $HOME/.profile
+echo $PATH
+vector --version
+useradd vector
+mkdir /var/lib/vector
+cp -av etc/systemd/vector.service /etc/systemd/system
+yum install nano
+nano /etc/systemd/system/vector.service
+
+cp vector.yaml /etc/vector/vector.yaml
+ mkdir /etc/vector
+ cp /vector/config/vector.yaml /etc/vector/vector.yaml
+mkdir /var/lib/vector/
+ chown -R vector /var/lib/vector/
+ su vector
+/vector/bin/vector validate
+ catsystemctl start vector.service
+systemctl status vector.service
+journalctl -xe
+
+
 docker run -d --privileged --name test_systemd_centos oowy/centos:stream8
 docker exec -it test_systemd_centos bash
 # bash -c "$(curl -L https://setup.vector.dev)"
