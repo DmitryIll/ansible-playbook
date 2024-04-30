@@ -76,8 +76,7 @@
     template:
       src: "templates/vector.yaml.j2"
       dest: "/etc/vector/vector.yaml"
-
-  notify: Start clickhouse service
+    notify: Start vector service
 
 
   # # handlers:
