@@ -60,7 +60,7 @@
 
   - name: Копирование файла сервиса вектора
     copy:
-      src: "/vector/etc/systemd/vector.service"
+      src: "/vector/vector-x86_64-unknown-linux-musl/etc/systemd/vector.service"
       dest: "/etc/systemd/system"
       #mode: 0644
       remote_src: yes
