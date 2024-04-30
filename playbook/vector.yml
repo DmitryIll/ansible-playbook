@@ -1,12 +1,13 @@
 ---
 - name: Install Vector
   hosts: clickhouse
-  # handlers:
-  #   - name: Start vector service
-  #     become: true
-  #     ansible.builtin.service:
-  #       name: vector
-  #       state: restarted
+  handlers:
+    - name: Start vector service
+      become: true
+      ansible.builtin.service:
+        name: vector
+        state: restarted
+        enabled: yes
   tasks:
 
   - name: install nano
@@ -14,7 +15,6 @@
     ansible.builtin.yum:
       name:
         - nano
-  
   
   - name: Add user vector
     user:
@@ -77,15 +77,18 @@
       src: "templates/vector.yaml.j2"
       dest: "/etc/vector/vector.yaml"
 
-  # handlers:
-  - name: Start vector service
-    become: true
-    # become_method: su
-    # become_user: root
-    ansible.builtin.service:
-      name: vector
-      state: restarted
-      enabled: yes
+  notify: Start clickhouse service
+
+
+  # # handlers:
+  # - name: Start vector service
+  #   become: true
+  #   # become_method: su
+  #   # become_user: root
+  #   ansible.builtin.service:
+  #     name: vector
+  #     state: restarted
+  #     enabled: yes
 
 # /vector/vector-x86_64-unknown-linux-musl/etc/systemd/vector.service
 
