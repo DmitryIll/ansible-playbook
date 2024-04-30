@@ -23,9 +23,9 @@
       group: vector
       mode: 0755
     loop:
-      - /vector/
-      - /var/lib/vector
-      - /etc/vector
+      - '/vector/'
+      - '/var/lib/vector'
+      - '/etc/vector'
 
   - name: Add user vector
     user:
