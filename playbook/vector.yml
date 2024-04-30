@@ -60,7 +60,7 @@
 
   - name: Копирование файла сервиса вектора
     copy:
-      src: "/vector/config/vector.yaml"
+      src: "/vector/vector-x86_64-unknown-linux-musl/config/vector.yaml"
       dest: "/etc/vector/vector.yaml"
       #mode: 0644
       remote_src: yes
