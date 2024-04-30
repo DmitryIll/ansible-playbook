@@ -8,16 +8,31 @@
   #       name: vector
   #       state: restarted
   tasks:
+
+  - name: install nano
+    become: true
+    ansible.builtin.yum:
+      name:
+        - nano
+
   - name: Create Directories
     file:
       path: "{{ item }}"
       state: directory
-      owner: root
-      group: root
+      owner: vector
+      group: vector
       mode: 0755
     loop:
-      - '/vector/'
-      - '/var/lib/vector'
+      - /vector/
+      - /var/lib/vector
+      - /etc/vector
+
+  - name: Add user vector
+    user:
+      name: vector
+#      shell: /bin/bash
+#      home: /home/baeldung
+
 
     # - block:
   - name: Get vector distrib
@@ -41,10 +56,19 @@
 
   - name: Копирование файла сервиса вектора
     copy:
-      src: "/vector/vector-x86_64-unknown-linux-musl/etc/systemd/vector.service"
-      dest: "/etc/systemd/system/vector.service"
-      mode: 0644
+      src: "/vector/config/vector.yaml"
+      dest: "/etc/vector/vector.yaml"
+      #mode: 0644
       remote_src: yes
+
+  - name: Копирование файла конфига вектора
+    copy:
+      src: "/vector/vector-x86_64-unknown-linux-musl/bin/vector"
+      dest: "/usr/bin/vector"
+      mode: 0755
+      remote_src: yes
+
+
 
   # handlers:
   - name: Start vector service
